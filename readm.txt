@@ -1,0 +1,40 @@
+一、创建MySQL的docker容器 sh /root/docker/mysql/start.sh
+[root@iZbp16yqwdlflk6ysilycbZ docker]# tree mysql/
+mysql/
+├── conf.d
+│   └── my.cnf
+├── data
+└── start.sh
+
+二、django-uwsgi-nginx 
+[root@iZbp16yqwdlflk6ysilycbZ docker]# tree django-uwsgi-nginx/
+django-uwsgi-nginx/
+├── Dockerfile
+├── nginx-app.conf
+├── requirements.txt
+├── run
+├── supervisor-app.ini
+├── uwsgi.ini
+└── uwsgi_params
+#构建镜像
+ docker build -t images_name path
+ #启动容器
+ docker run -itd \
+  --link mysql:mysql \
+  -v /root/wwwroot/connorflow/:/home/docker/code/connorflow \
+  --name webapp-connorflow \
+  -p 80:80 \
+  connorflow 
+  
+  docker exec -it container_name bash
+  
+  三、进入容器，并迁移数据，建表
+  例如：项目为connorflow
+  python3 /home/docker/code/connorflow/manage.py migrate
+  python3 /home/docker/code/connorflow/manage.py collectstatic
+  python3 /home/docker/code/connorflow/manage.py createsuperuser
+  
+  启动项目：
+  supervisord -n &
+  
+    
