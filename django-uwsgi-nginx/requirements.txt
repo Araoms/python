@@ -26,7 +26,7 @@ django-celery-results==1.0.4
 django-redis==4.10.0
 django-stubs==1.0.2
 django-timezone-field==3.0
-djangorestframework==3.9.2
+djangorestframework==3.11.2
 djangorestframework-stubs==0.3.0
 et-xmlfile==1.0.1
 gevent==1.4.0
